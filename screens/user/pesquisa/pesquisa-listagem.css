@@ -1,0 +1,70 @@
+.background-page-pesquisa {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    height: 100vh;
+    width: 100vw;
+    justify-content: flex-start;
+    padding: 3em 0;
+}
+
+.title-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.blocos-arrow {
+    background: none;
+    border: none;
+    font-size: xx-large;
+}
+
+.image-pesquisa {
+    width: 40%;
+}
+
+.title-pesquisa {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.sub-title-pesquisa {
+    font-weight: 600;
+    font-size: 16px;
+    color: #50555C;
+}
+
+.pesquisa-results {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    padding: 0 2em;
+    width: 80%;
+}
+
+.pesquisa-results-blocos {
+    margin: 1em 0.5em;
+    border-bottom: 1px solid #50555C;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+.titulo-resultados {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.nome-resultados {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.arrow-div {
+    display: flex;
+    justify-content: flex-start;
+    width: 90%;
+}

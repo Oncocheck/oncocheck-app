@@ -1,11 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef } from 'react';
 import { Animated, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import appLogo from '../assets/logo-oncocheck.png'
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [usuario, setUsuario] = useState(null);
+  const [senha, setSenha] = useState(null);
+
+  const goToHome = () => {
+    if(usuario === 'admin' && senha === 'admin'){
+      navigate('/admin');
+    }else{
+      navigate('/' + usuario);
+    }
+  }
+
+
   return (
     <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.pageContainer}>
       <Animated.View
@@ -13,7 +25,7 @@ export default function Login() {
           ...styles.logoContainer,
         }}
       >
-        <Image source={appLogo} />
+        <Image source='assets/logo-oncocheck.png' />
       </Animated.View>
 
       <Animated.View style={{ ...styles.contentContainer }} >
@@ -22,14 +34,14 @@ export default function Login() {
         <View style={styles.loginForm}>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Login</Text>
-            <TextInput style={styles.input} placeholder='Exemplo123@' />
+            <TextInput style={styles.input} placeholder='Exemplo123@' onChange={e => setUsuario(e.target.value)}/>
           </View>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <TextInput style={styles.input} secureTextEntry placeholder='********' />
+            <TextInput style={styles.input} secureTextEntry placeholder='********' onChange={e => setSenha(e.target.value)}/>
           </View>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => goToHome()}>
             <Text style={styles.buttonLabel}>Entrar</Text>
           </TouchableOpacity>
 

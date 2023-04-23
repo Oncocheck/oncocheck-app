@@ -1,0 +1,35 @@
+.box-usuarios {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 93%;
+    height: 100vh;
+    padding: 1em;
+}
+
+.title-usuarios {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.box-input-usuarios {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 0;
+}
+
+.text-input-usuarios {
+    font-weight: 400;
+    font-size: 12px;
+    color: #666666;
+    padding: 1em 0;
+}
+
+.input-usuarios {
+    background: #F6F6F6;
+    border: 1px solid #F6F6F6;
+    border-radius: 8px;
+    color: #BDBDBD;
+    padding: 1em;
+}

@@ -1,0 +1,70 @@
+.screen-administrador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.title-adiministrador {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}
+
+.image-administrador {
+    width: 120%;
+}
+
+.paragrafo-administrador {
+    font-weight: 600;
+    font-size: 30px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.box-administrador {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 93%;
+    height: 60vh;
+    padding: 1em;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.box-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 50%;
+}
+
+.button-azul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 2em;
+    background: #5162FA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.button-vermelho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 2em;
+    background: #F61515;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+}
