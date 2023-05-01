@@ -12,24 +12,24 @@ export default function MainPage() {
 
     return (
         <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.screenMain}>
-        <Animated.View style={styles.blocoButtons}>
+        <View style={styles.blocoButtons}>
             <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Login')}>
                  <FontAwesomeIcon icon={faArrowLeft} size={30}/>
              </TouchableOpacity>
              <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Favoritos')}>
                  <FontAwesomeIcon icon={faStar} size={30}/>
              </TouchableOpacity>
-        </Animated.View>
-        <Animated.View
+        </View>
+        <View
             style={{
             ...styles.logoContainer,
             }}
         >
             <Text style={styles.titleHome}>Buscar exames de acordo com a parte do corpo relacionada</Text>
             <Image source={Home} style={styles.imageHome}/>
-        </Animated.View>
+        </View>
 
-        <Animated.View style={{ ...styles.contentContainer }} >
+        <View style={{ ...styles.contentContainer }} >
 
              <View style={styles.boxPesquisaHome}>
              <Text style={styles.titlePesquisaHome}>Ou digite aqui sua suspeita</Text>
@@ -38,12 +38,12 @@ export default function MainPage() {
                  placeholder='Pesquise aqui'
                  onChangeText={(text) => setInput(text)}
              />
-             <TouchableOpacity style={styles.buttonPesquisaHome}>
+             <TouchableOpacity style={styles.buttonPesquisaHome} onPress={() => navigation.navigate('Pesquisa')}>
                  <Text style={styles.buttonPesquisaHomeText}>Consultar</Text>
              </TouchableOpacity>
              </View>
 
-        </Animated.View>
+        </View>
 
         </LinearGradient >
     );
