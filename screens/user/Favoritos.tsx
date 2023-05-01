@@ -8,34 +8,34 @@ export default function Favoritos() {
   const navigation = useNavigation();
 
   return (
-    <Animated.View style={styles.screenMain}>
-      <Animated.View style={styles.blocoButtons}>
+    <View style={styles.screenMain}>
+      <View style={styles.blocoButtons}>
         <TouchableOpacity style={styles.blocosArrow} onPress={() => { }}>
           <FontAwesomeIcon icon={faArrowLeft} size={30} />
         </TouchableOpacity>
-      </Animated.View>
-      <Animated.View
+      </View>
+      <View
         style={{
           ...styles.logoContainer,
         }}
       >
         <Text style={styles.titleFavorito}>Exames Favoritos</Text>
-      </Animated.View>
-      <Animated.View style={{ ...styles.contentContainer }} >
-        <Animated.View style={{ ...styles.infoContainer }} >
+      </View>
+      <View style={{ ...styles.contentContainer }} >
+        <View style={{ ...styles.infoContainer }} >
           <Text style={styles.subTitlePesquisaHome}>NSE</Text>
           <TouchableOpacity style={styles.blocosArrow}>
             <FontAwesomeIcon icon={faTrashCan} size={20} />
           </TouchableOpacity>
-        </Animated.View>
-        <Animated.View style={{ ...styles.infoContainer }} >
+        </View>
+        <View style={{ ...styles.infoContainer }} >
           <Text style={styles.subTitlePesquisaHome}>TG</Text>
           <TouchableOpacity style={styles.blocosArrow}>
             <FontAwesomeIcon icon={faTrashCan} size={20} />
           </TouchableOpacity>
-        </Animated.View>
-      </Animated.View>
-    </Animated.View >
+        </View>
+      </View>
+    </View >
   );
 }
 
