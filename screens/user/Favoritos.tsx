@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -10,16 +10,17 @@ export default function Favoritos() {
   return (
     <View style={styles.screenMain}>
       <View style={styles.blocoButtons}>
-        <TouchableOpacity style={styles.blocosArrow} onPress={() => { }}>
+        <TouchableOpacity
+          style={styles.blocosArrow}
+          onPress={navigation.goBack}
+        >
           <FontAwesomeIcon icon={faArrowLeft} size={30} />
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          ...styles.logoContainer,
-        }}
-      >
-        <Text style={styles.titleFavorito}>Exames Favoritos</Text>
+      <View style={{ ...styles.logoContainer, }}>
+        <Text style={styles.titleFavorito}>
+          Exames Favoritos
+        </Text>
       </View>
       <View style={{ ...styles.contentContainer }} >
         <View style={{ ...styles.infoContainer }} >
@@ -45,6 +46,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
+    padding: 24,
+    paddingTop: 40
   },
   logoContainer: {
     justifyContent: 'center',
@@ -55,7 +58,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 32,
     paddingHorizontal: 8,
     borderWidth: 0,
     borderTopStartRadius: 32,
@@ -71,9 +73,7 @@ const styles = StyleSheet.create({
   blocoButtons: {
     display: 'flex',
     justifyContent: 'flex-start',
-    flexDirection: 'row',
-    width: '80%',
-    paddingTop: 40,
+    width: '100%',
   },
   blocosArrow: {
     backgroundColor: 'transparent',
