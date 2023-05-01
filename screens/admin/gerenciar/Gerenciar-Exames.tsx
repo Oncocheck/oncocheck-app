@@ -2,27 +2,35 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Inconsistencia() {
+export default function GerenciarExames() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.screenInconsistencia}>
+        <View style={styles.screenGExames}>
             <View
                 style={{
                 ...styles.logoContainer,
                 }}
             >
-                <Text style={styles.titleInconsistencia}>Relatar Inconsistência</Text>
+                <Text style={styles.titleGExames}>Cadastrar exame</Text>
             </View>
             <View style={{ ...styles.contentContainer }} >
-                <Text style={styles.subTile}>
-                    Descreva a inconsistência no campo abaixo
-                </Text>
-                <TextInput style={styles.inputText} multiline={true} numberOfLines={10}/>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Nome</Text>
+                    <TextInput style={styles.input}/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Orgãos Relacionados</Text>
+                    <TextInput style={styles.input}/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Descrição</Text>
+                    <TextInput style={styles.inputDescricao}/>
+                </View>
                 <TouchableOpacity style={styles.buttonAzul}>
-                    <Text style={styles.textButton}>Enviar</Text>
+                    <Text style={styles.textButton}>Salvar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonVermelho} onPress={() => navigation.navigate('Inconsistencia')}>
+                <TouchableOpacity style={styles.buttonVermelho} onPress={() => navigation.navigate('Administrador')}>
                     <Text style={styles.textButton}>Cancelar</Text>
                 </TouchableOpacity>
             </View>
@@ -31,13 +39,13 @@ export default function Inconsistencia() {
 }
 
 const styles = StyleSheet.create({
-    screenInconsistencia: {
+    screenGExames: {
         flex: 1,
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
-        paddingTop: 40,
+        paddingTop: 10,
     },
     logoContainer: {
         justifyContent: 'center',
@@ -56,7 +64,32 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
-    titleInconsistencia: {
+    formItem: {
+        marginVertical: 8
+    },
+    inputLabel: {
+        fontSize: 16,
+        fontWeight: '600',
+        paddingVertical: 4,
+        color: '#666666'
+    },
+    input: {
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderRadius: 8
+    },
+    inputDescricao: {
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderRadius: 8,
+        height: 200,
+        textAlignVertical: 'top',
+    },
+    titleGExames: {
         fontWeight: '600',
         fontSize: 30,
         textAlign: 'center',
@@ -67,15 +100,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#666666',
         marginBottom: 20,
-    },
-    inputText: {
-        width: '100%',
-        backgroundColor: '#F6F6F6',
-        borderWidth: 1,
-        borderColor: '#E8E8E8',
-        borderRadius: 8,
-        height: 400,
-        textAlignVertical: 'top',
     },
     buttonAzul: {
         display: 'flex',

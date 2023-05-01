@@ -7,40 +7,28 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function Administrador() {
   const navigation = useNavigation();
 
-  // const goToExames = () => {
-  //   navigation.navigate('Exames');
-  // };
-
-  // const goToUsuarios = () => {
-  //   navigation.navigate('Usuarios');
-  // };
-
-  // const goToInconsistencias = () => {
-  //   navigation.navigate('Inconsistencias');
-  // };
-
   return (
     <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.screenAdministrador}>
-      <Animated.View
+      <View
         style={{
           ...styles.logoContainer,
         }}
       >
         <Image source={appLogo} />
         <Text style={styles.titleAdministrador}>Administrador</Text>
-      </Animated.View>
+      </View>
 
-      <Animated.View style={{ ...styles.contentContainer }} >
+      <View style={{ ...styles.contentContainer }} >
 
       <View style={styles.adminForm}>
         <View style={styles.boxButton}>
-          <TouchableOpacity style={styles.buttonAzul}>
+          <TouchableOpacity style={styles.buttonAzul} onPress={() => navigation.navigate('GerenciarExames')}>
             <Text style={styles.textButton}>Gerenciar Exames</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonAzul}>
+          <TouchableOpacity style={styles.buttonAzul} onPress={() => navigation.navigate('GerenciarUsuarios')}>
             <Text style={styles.textButton}>Gerenciar Usuários</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonAzul}>
+          <TouchableOpacity style={styles.buttonAzul} onPress={() => navigation.navigate('ConsultarInconsistencias')}>
             <Text style={styles.textButton}>Consultar Inconsistências</Text>
           </TouchableOpacity>
         </View>
@@ -51,7 +39,7 @@ export default function Administrador() {
         </View>
       </View>
 
-      </Animated.View>
+      </View>
 
     </LinearGradient >
   )
@@ -82,25 +70,11 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         padding: 8
     },
-    imageAdministrador: {
-        width: '120%',
-    },
     titleAdministrador: {
         fontWeight: '600',
         fontSize: 30,
         color: '#FFFFFF',
         margin: 0,
-    },
-    boxAdministrador: {
-        backgroundColor: '#FFFFFF',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        width: '93%',
-        height: '60%',
-        padding: 16,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
     },
     boxButton: {
         display: 'flex',

@@ -9,7 +9,7 @@ export default function PesquisaDetalhe() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.screenMain}>
+        <View style={styles.screenDetalhe}>
             <View style={styles.blocoButtons}>
                 <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Pesquisa')}>
                     <FontAwesomeIcon icon={faArrowLeft} size={30}/>
@@ -21,7 +21,7 @@ export default function PesquisaDetalhe() {
                     ...styles.logoContainer,
                     }}
                 >
-                    <Image source={Cerebro} style={styles.imageListagem}/>
+                    <Image source={Cerebro} style={styles.imageDetalhe}/>
                     <Text style={styles.titleDetalhe}>TG</Text>
                 </View>
                 <View style={styles.subLogoContainer}>
@@ -32,10 +32,10 @@ export default function PesquisaDetalhe() {
                 </View>
             </View>
             <View style={{ ...styles.contentContainer }} >
-                <Text style={styles.textListagem}>
+                <Text style={styles.textDetalhe}>
                     A tireoglobulina é um marcador tumoral muito utilizado para avaliar o desenvolvimento do câncer de tireoide, especialmente durante o seu tratamen-to, ajudando o médico a adaptar a forma de tratamen-to e/ou as doses, de acordo com os resultados.
                 </Text>
-                <Text style={styles.textListagem}>
+                <Text style={styles.textDetalhe}>
                     O valor de tireoglobulina em uma pessoa saudável, sem qualuer alteração na tireoide, geralmente é inferior a 10 ng/mL. Assim se o resultado do exame estiver acima desses valores, pode indicar a pre-sença de um problema na tireoide.
                 </Text>
             </View>
@@ -49,7 +49,7 @@ export default function PesquisaDetalhe() {
 }
 
 const styles = StyleSheet.create({
-    screenMain: {
+    screenDetalhe: {
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
     },
-    textListagem: {
+    textDetalhe: {
         fontWeight: '600',
         fontSize: 14,
         textAlign: 'justify',
@@ -112,19 +112,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         fontSize: 30,
     },
-    subTitlePesquisaHome: {
-        fontWeight: '500',
-        fontSize: 16,
-    },
-    infoContainer: {
-        marginVertical: 8,
-        marginHorizontal: 4,
-        borderBottomWidth: 1,
-        borderBottomColor: '#50555C',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    imageListagem: {
+    imageDetalhe: {
         width: 90,
         height: 65,
     },

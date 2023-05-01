@@ -2,27 +2,43 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Inconsistencia() {
+export default function GerenciarUsuarios() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.screenInconsistencia}>
+        <View style={styles.screenGUsuarios}>
             <View
                 style={{
                 ...styles.logoContainer,
                 }}
             >
-                <Text style={styles.titleInconsistencia}>Relatar Inconsistência</Text>
+                <Text style={styles.titleDetalhe}>Editar dados do usuário</Text>
             </View>
             <View style={{ ...styles.contentContainer }} >
-                <Text style={styles.subTile}>
-                    Descreva a inconsistência no campo abaixo
-                </Text>
-                <TextInput style={styles.inputText} multiline={true} numberOfLines={10}/>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Nome</Text>
+                    <TextInput style={styles.input} placeholder='José Maria dos Santos'/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Tipo</Text>
+                    <TextInput style={styles.input} placeholder='Administrador'/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>CRM</Text>
+                    <TextInput style={styles.input} placeholder='José Maria dos Santos'/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Login</Text>
+                    <TextInput style={styles.input}/>
+                </View>
+                <View style={styles.formItem}>
+                    <Text style={styles.inputLabel}>Senha</Text>
+                    <TextInput style={styles.input} placeholder='************'/>
+                </View>
                 <TouchableOpacity style={styles.buttonAzul}>
-                    <Text style={styles.textButton}>Enviar</Text>
+                    <Text style={styles.textButton}>Salvar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonVermelho} onPress={() => navigation.navigate('Inconsistencia')}>
+                <TouchableOpacity style={styles.buttonVermelho} onPress={() => navigation.navigate('Administrador')}>
                     <Text style={styles.textButton}>Cancelar</Text>
                 </TouchableOpacity>
             </View>
@@ -31,13 +47,13 @@ export default function Inconsistencia() {
 }
 
 const styles = StyleSheet.create({
-    screenInconsistencia: {
+    screenGUsuarios: {
         flex: 1,
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
-        paddingTop: 40,
+        paddingTop: 10,
     },
     logoContainer: {
         justifyContent: 'center',
@@ -56,26 +72,26 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
-    titleInconsistencia: {
+    formItem: {
+        marginVertical: 8
+    },
+    inputLabel: {
+        fontSize: 16,
+        fontWeight: '600',
+        paddingVertical: 4,
+        color: '#666666'
+    },
+    input: {
+        paddingVertical: 12,
+        paddingHorizontal: 12,
+        backgroundColor: '#eee',
+        borderWidth: 0,
+        borderRadius: 8
+    },
+    titleDetalhe: {
         fontWeight: '600',
         fontSize: 30,
         textAlign: 'center',
-    },
-    subTile: {
-        fontWeight: '500',
-        fontSize: 14,
-        textAlign: 'center',
-        color: '#666666',
-        marginBottom: 20,
-    },
-    inputText: {
-        width: '100%',
-        backgroundColor: '#F6F6F6',
-        borderWidth: 1,
-        borderColor: '#E8E8E8',
-        borderRadius: 8,
-        height: 400,
-        textAlignVertical: 'top',
     },
     buttonAzul: {
         display: 'flex',

@@ -70,12 +70,6 @@ const styles = StyleSheet.create({
         borderTopEndRadius: 32,
         width: '100%',
     },
-    backgroundPageHome: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      flexDirection: 'column',
-    },
     titleHome: {
         fontWeight: '600',
         fontSize: 30,
