@@ -1,18 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef } from 'react';
-import { Animated, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Animated, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import appLogo from '../assets/logo-oncocheck.png'
+import { NativeStackParamList } from '../router';
+import LabeledInput from '../components/LabeledInput';
 
-export default function Login() {
+type Props = NativeStackScreenProps<NativeStackParamList, 'Login'>
+
+export default function Login({ navigation }: Props) {
+  const linkToSignUp = () => {
+    navigation.navigate('CadastroUsuario')
+  }
+
   return (
     <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.pageContainer}>
-      <Animated.View
-        style={{
-          ...styles.logoContainer,
-        }}
-      >
+      <StatusBar />
+
+      <Animated.View style={{ ...styles.logoContainer }}>
         <Image source={appLogo} />
       </Animated.View>
 
@@ -20,21 +25,24 @@ export default function Login() {
         <Text style={styles.loginTitle}>Faça o Login</Text>
 
         <View style={styles.loginForm}>
-          <View style={styles.formItem}>
-            <Text style={styles.inputLabel}>Login</Text>
-            <TextInput style={styles.input} placeholder='Exemplo123@' />
-          </View>
-          <View style={styles.formItem}>
-            <Text style={styles.inputLabel}>Senha</Text>
-            <TextInput style={styles.input} secureTextEntry placeholder='********' />
-          </View>
+          <LabeledInput
+            style={styles.formItem}
+            label="Login"
+            placeholder='Exemplo123@'
+          />
+          <LabeledInput
+            style={styles.formItem}
+            label="Senha"
+            secureTextEntry
+            placeholder='********'
+          />
 
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonLabel}>Entrar</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.forgotPassword} onPress={() => { }}>
-            <Text>Esqueci minha senha</Text>
+          <TouchableOpacity style={styles.forgotPassword} onPress={linkToSignUp}>
+            <Text>Criar uma conta de usuário</Text>
           </TouchableOpacity>
         </View>
 
@@ -107,7 +115,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     alignItems: 'center',
     padding: 14,
-    backgroundColor: '#ddd',
     borderWidth: 0,
     borderRadius: 8,
     marginTop: 12
