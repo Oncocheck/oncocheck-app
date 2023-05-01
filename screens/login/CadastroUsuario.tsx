@@ -1,11 +1,14 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { useNavigation } from "@react-navigation/native";
+// import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { Text, View, StyleSheet, StatusBar, TouchableOpacity, KeyboardAvoidingView, ScrollView } from "react-native";
-import LabeledInput from "../components/LabeledInput";
-import { NativeStackParamList } from "../router"
+import LabeledInput from "../../components/LabeledInput";
+// import { NativeStackParamList } from "../router"
 
-type Props = NativeStackScreenProps<NativeStackParamList, 'CadastroUsuario'>;
+// type Props = NativeStackScreenProps<NativeStackParamList, 'CadastroUsuario'>;
 
-export default function CadastroUsuario({ navigation }: Props) {
+export default function CadastroUsuario() {
+  const navigation = useNavigation()
+
   const goBack = () => {
     navigation.goBack()
   }
