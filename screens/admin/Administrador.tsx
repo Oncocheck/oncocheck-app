@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import appLogo from '../assets/logo-oncocheck.png';
+import appLogo from '../../assets/logo-oncocheck.png';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Administrador() {

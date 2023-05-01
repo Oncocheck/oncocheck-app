@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Animated, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import appLogo from '../assets/logo-oncocheck.png'
+import appLogo from '../../assets/logo-oncocheck.png'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,7 +17,7 @@ export default function Login() {
     if(usuario === 'admin' && senha === 'admin'){
       navigation.navigate('Admin');
     }else {
-      navigation.navigate('MainPage');
+      navigation.navigate('Main');
     }
   }
 
@@ -37,11 +37,11 @@ export default function Login() {
         <View style={styles.loginForm}>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Login</Text>
-            <TextInput style={styles.input} placeholder='Exemplo123@' onChangeText={e => setUsuario(e)}/>
+            <TextInput style={styles.input} placeholder='Exemplo123@' onChangeText={(text) => setUsuario(text)}/>
           </View>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <TextInput style={styles.input} secureTextEntry placeholder='********' onChangeText={e => setSenha(e)}/>
+            <TextInput style={styles.input} secureTextEntry placeholder='********' onChangeText={(text) => setSenha(text)}/>
           </View>
 
           <TouchableOpacity style={styles.button} onPress={() => goToHome()}>

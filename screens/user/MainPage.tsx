@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
-import Home from '../assets/home-oncocheck.png';
+import Home from '../../assets/home-oncocheck.png';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +16,7 @@ export default function MainPage() {
             <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Login')}>
                  <FontAwesomeIcon icon={faArrowLeft} size={30}/>
              </TouchableOpacity>
-             <TouchableOpacity style={styles.blocosArrow}>
+             <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Favoritos')}>
                  <FontAwesomeIcon icon={faStar} size={30}/>
              </TouchableOpacity>
         </Animated.View>

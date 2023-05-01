@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from './screens/Login';
-import Administrador from './screens/Administrador';
-import MainPage from './screens/MainPage';
+import Login from './screens/login';
+import Administrador from './screens/admin';
+import MainPage from './screens/user';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +16,7 @@ function Index() {
         }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Admin" component={Administrador} />
-        <Stack.Screen name="MainPage" component={MainPage} />
+        <Stack.Screen name="Main" component={MainPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
