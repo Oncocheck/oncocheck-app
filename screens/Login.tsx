@@ -1,11 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Animated, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import appLogo from '../assets/logo-oncocheck.png'
 
+import { useNavigation } from '@react-navigation/native';
+
+
 export default function Login() {
+  const navigation = useNavigation();
+  const [usuario, setUsuario] = useState(null);
+  const [senha, setSenha] = useState(null);
+
+  const goToHome = () => {
+    if(usuario === 'admin' && senha === 'admin'){
+      navigation.navigate('Admin');
+    }else {
+      navigation.navigate('MainPage');
+    }
+  }
+
   return (
     <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.pageContainer}>
       <Animated.View
@@ -22,14 +37,14 @@ export default function Login() {
         <View style={styles.loginForm}>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Login</Text>
-            <TextInput style={styles.input} placeholder='Exemplo123@' />
+            <TextInput style={styles.input} placeholder='Exemplo123@' onChangeText={e => setUsuario(e)}/>
           </View>
           <View style={styles.formItem}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <TextInput style={styles.input} secureTextEntry placeholder='********' />
+            <TextInput style={styles.input} secureTextEntry placeholder='********' onChangeText={e => setSenha(e)}/>
           </View>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => goToHome()}>
             <Text style={styles.buttonLabel}>Entrar</Text>
           </TouchableOpacity>
 
