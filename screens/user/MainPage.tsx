@@ -1,45 +1,111 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
+import { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Animated } from 'react-native';
 import Home from '../../assets/home-oncocheck.png';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import SelectDropdown from 'react-native-select-dropdown';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+interface Organ {
+  id: number
+  name: string
+}
 
 export default function MainPage() {
   const navigation = useNavigation();
-  const [input, setInput] = useState('');
+  const [selectedOrgan, setSelectedOrgan] = useState('');
+
+  const [availableOrgans, setAvailableOrgans] = useState<string[]>([])
+
+  const linkToFavorites = () => {
+    navigation.navigate('Favoritos')
+  }
+
+  const selectOrgan = (item: string, _: number) => {
+    setSelectedOrgan(item)
+  }
+
+  const linkToExamSearchResults = () => {
+    // navigation.navigate('')
+  }
+
+  const loadAvailableOrgans = async () => {
+    try {
+      const cacheOrgans = await AsyncStorage.getItem('@availableOrgans')
+
+      if (cacheOrgans) {
+        console.log("Pegando do cache")
+        setAvailableOrgans(JSON.parse(cacheOrgans))
+      } else {
+        console.log("Pegando da API")
+        const url = "http://192.168.0.105:8080/organs"
+        const response = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+
+        const json = await response.json()
+
+        const fetchedOrgans = json.data.map((organ: Organ) => organ.name)
+
+        await AsyncStorage.setItem(
+          "@availableOrgans",
+          JSON.stringify(fetchedOrgans)
+        )
+
+        setAvailableOrgans(fetchedOrgans)
+      }
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
+  useEffect(() => {
+    loadAvailableOrgans()
+  }, [])
 
   return (
     <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.screenMain}>
       <Animated.View style={styles.blocoButtons}>
-        <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity
+          style={styles.blocosArrow}
+          onPress={navigation.goBack}
+        >
           <FontAwesomeIcon icon={faArrowLeft} size={30} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.blocosArrow} onPress={() => navigation.navigate('Favoritos')}>
+        <TouchableOpacity
+          style={styles.blocosArrow}
+          onPress={linkToFavorites}
+        >
           <FontAwesomeIcon icon={faStar} size={30} />
         </TouchableOpacity>
       </Animated.View>
-      <Animated.View
-        style={{
-          ...styles.logoContainer,
-        }}
-      >
-        <Text style={styles.titleHome}>Buscar exames de acordo com a parte do corpo relacionada</Text>
+      <Animated.View style={{ ...styles.logoContainer, }} >
+        <Text style={styles.titleHome}>
+          Buscar exames de acordo com a parte do corpo relacionada
+        </Text>
         <Image source={Home} style={styles.imageHome} />
       </Animated.View>
 
       <Animated.View style={{ ...styles.contentContainer }} >
 
         <View style={styles.boxPesquisaHome}>
-          <Text style={styles.titlePesquisaHome}>Ou digite aqui sua suspeita</Text>
-          <TextInput
-            style={styles.pesquisaHome}
-            placeholder='Pesquise aqui'
-            onChangeText={(text) => setInput(text)}
+          <Text style={styles.titlePesquisaHome}>
+            Ou digite aqui sua suspeita
+          </Text>
+          <SelectDropdown
+            data={availableOrgans}
+            onSelect={selectOrgan}
           />
           <TouchableOpacity style={styles.buttonPesquisaHome}>
-            <Text style={styles.buttonPesquisaHomeText}>Consultar</Text>
+            <Text style={styles.buttonPesquisaHomeText} onPress={() => { }}>
+              Consultar
+            </Text>
           </TouchableOpacity>
         </View>
 
