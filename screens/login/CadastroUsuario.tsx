@@ -1,11 +1,9 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Text, View, StyleSheet, StatusBar, TouchableOpacity, KeyboardAvoidingView, ScrollView } from "react-native";
 import LabeledInput from "../../components/LabeledInput";
 import config from "../../config";
 import { errorAlert } from "../../helpers/alert";
-import { signIn } from "../../services/user";
 
 export default function CadastroUsuario() {
   const navigation = useNavigation()
