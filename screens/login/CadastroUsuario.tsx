@@ -1,16 +1,58 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-// import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { useState } from "react";
 import { Text, View, StyleSheet, StatusBar, TouchableOpacity, KeyboardAvoidingView, ScrollView } from "react-native";
 import LabeledInput from "../../components/LabeledInput";
-// import { NativeStackParamList } from "../router"
-
-// type Props = NativeStackScreenProps<NativeStackParamList, 'CadastroUsuario'>;
+import config from "../../config";
+import { errorAlert } from "../../helpers/alert";
+import { signIn } from "../../services/user";
 
 export default function CadastroUsuario() {
   const navigation = useNavigation()
 
+  const [name, onChangeName] = useState('')
+  const [login, onChangeLogin] = useState('')
+  const [email, onChangeEmail] = useState('')
+  const [password, onChangePassword] = useState('')
+  const [repeatPassword, onChangeRepeatPassword] = useState('')
+  const [crm, onChangeCRM] = useState('')
+
   const goBack = () => {
     navigation.goBack()
+  }
+
+  const signUpUser = async () => {
+    if (password !== repeatPassword) {
+      errorAlert("Erro ao realizar seu cadastro", 'As senhas não batem.')
+    } else {
+      try {
+        const url = `${config.apiUrl}/signup`
+        const responseRaw = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            login,
+            email,
+            crm,
+            password,
+          })
+        })
+
+        if (responseRaw.status === 201) {
+          navigation.navigate('ScreenLogin')
+        } else {
+          const response = await responseRaw.json()
+          if (response.error) {
+            errorAlert("Erro ao realizar seu cadastro", response.error)
+          }
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
   }
 
   return (
@@ -28,26 +70,40 @@ export default function CadastroUsuario() {
             style={styles.loginItem}
             label="Nome"
             placeholder="Fulano dos Santos"
+            onChangeText={onChangeName}
           />
-          <LabeledInput style={styles.loginItem} label="CRM" />
+          <LabeledInput
+            style={styles.loginItem}
+            label="E-Mail"
+            placeholder="exemplo@email.com"
+            onChangeText={onChangeEmail}
+          />
+          <LabeledInput
+            style={styles.loginItem}
+            label="CRM"
+            onChangeText={onChangeCRM}
+          />
           <LabeledInput
             style={styles.loginItem}
             label="Login"
             placeholder="Exemplologin1234"
+            onChangeText={onChangeLogin}
           />
           <LabeledInput
             style={styles.loginItem}
             label="Senha"
             secureTextEntry
             placeholder="********"
+            onChangeText={onChangePassword}
           />
           <LabeledInput
             style={styles.loginItem}
             secureTextEntry
             label="Repita a Senha"
+            onChangeText={onChangeRepeatPassword}
           />
 
-          <TouchableOpacity style={styles.signInButton}>
+          <TouchableOpacity style={styles.signInButton} onPress={signUpUser}>
             <Text style={styles.buttonLabel}>Cadastrar</Text>
           </TouchableOpacity>
 

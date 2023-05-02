@@ -1,29 +1,60 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import LabeledInput from '../../components/LabeledInput';
 
 import appLogo from '../../assets/logo-oncocheck.png'
 
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { errorAlert } from '../../helpers/alert';
+import config from '../../config';
 
 export default function Login() {
   const navigation = useNavigation();
-  const [usuario, setUsuario] = useState(null);
-  const [senha, setSenha] = useState(null);
+  const [login, onLoginChange] = useState("");
+  const [password, onPasswordChange] = useState("");
 
-  const goToHome = () => {
-    if (usuario === 'admin' && senha === 'admin') {
-      navigation.navigate('Admin');
+  const goToHome = (userType: string) => {
+    if (userType === 'medic') {
+      navigation.navigate('Main')
+    } else if (userType === 'admin') {
+      navigation.navigate('Admin')
     } else {
-      navigation.navigate('Main');
+      errorAlert('Erro ao realizar login', 'Usuário cadastrado é invalido.')
     }
   }
 
   const linkToSignUp = () => {
     navigation.navigate('CadastroUsuario')
+  }
+
+  const submitSignIn = async () => {
+    // const responseRaw = await signIn(login, password)
+
+    const responseRaw = await fetch(config.apiUrl + '/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login,
+        password
+      })
+    })
+
+    const response = await responseRaw.json()
+
+    console.log(response)
+
+    if (!response.success || response.error) {
+      errorAlert("Erro ao logar no sistema", response.error)
+    } else {
+      await AsyncStorage.setItem("@sessionData", JSON.stringify(response.data))
+
+      goToHome(response.data.userType)
+    }
   }
 
   return (
@@ -42,16 +73,20 @@ export default function Login() {
             style={styles.formItem}
             label="Login"
             placeholder='Exemplo123@'
+            value={login}
+            onChangeText={onLoginChange}
           />
           <LabeledInput
             style={styles.formItem}
             label="Senha"
             secureTextEntry
             placeholder='********'
+            value={password}
+            onChangeText={onPasswordChange}
           />
 
-          <TouchableOpacity style={styles.button} onPress={() => goToHome()}>
-            <Text style={styles.buttonLabel}>Entrar</Text>
+          <TouchableOpacity style={styles.button} onPress={submitSignIn}>
+            <Text style={styles.buttonLabel} >Entrar</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.forgotPassword} onPress={linkToSignUp}>
@@ -61,7 +96,7 @@ export default function Login() {
 
       </View>
 
-    </LinearGradient >
+    </LinearGradient>
   )
 }
 
