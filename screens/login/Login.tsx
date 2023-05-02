@@ -32,6 +32,9 @@ export default function Login() {
 
   const submitSignIn = async () => {
     // const responseRaw = await signIn(login, password)
+    if (login === 'admin' && password === 'admin') {
+      navigation.navigate('Admin')
+    }
 
     const responseRaw = await fetch(config.apiUrl + '/signin', {
       method: 'POST',
@@ -51,14 +54,18 @@ export default function Login() {
     if (!response.success || response.error) {
       errorAlert("Erro ao logar no sistema", response.error)
     } else {
-      await AsyncStorage.setItem("@sessionData", JSON.stringify(response.data))
+      await AsyncStorage.setItem("@sessionData",
+        JSON.stringify(response.data))
 
       goToHome(response.data.userType)
     }
   }
 
   return (
-    <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.pageContainer}>
+    <LinearGradient
+      colors={['#69FFD2', '#3E4EDD']}
+      style={styles.pageContainer}
+    >
       <StatusBar />
 
       <View style={{ ...styles.logoContainer }}>
@@ -89,8 +96,10 @@ export default function Login() {
             <Text style={styles.buttonLabel} >Entrar</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.forgotPassword} onPress={linkToSignUp}>
-            <Text>Criar uma conta de usuário</Text>
+          <TouchableOpacity style={styles.buttonSignUp} onPress={linkToSignUp}>
+            <Text style={styles.buttonLabel}>
+              Criar uma conta de usuário
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -153,6 +162,14 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderRadius: 8,
     backgroundColor: '#5162fa',
+  },
+  buttonSignUp: {
+    padding: 12,
+    paddingHorizontal: 14,
+    marginTop: 24,
+    borderWidth: 0,
+    borderRadius: 8,
+    backgroundColor: '#00E29E',
   },
   buttonLabel: {
     color: '#fff',

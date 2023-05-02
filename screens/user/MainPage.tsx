@@ -28,7 +28,7 @@ export default function MainPage() {
   }
 
   const linkToExamSearchResults = () => {
-    // navigation.navigate('')
+    navigation.navigate('Pesquisa', { organ: selectedOrgan })
   }
 
   const loadAvailableOrgans = async () => {
@@ -70,7 +70,10 @@ export default function MainPage() {
   }, [])
 
   return (
-    <LinearGradient colors={['#69FFD2', '#3E4EDD']} style={styles.screenMain}>
+    <LinearGradient
+      colors={['#69FFD2', '#3E4EDD']}
+      style={styles.screenMain}
+    >
       <Animated.View style={styles.blocoButtons}>
         <TouchableOpacity
           style={styles.blocosArrow}
@@ -93,17 +96,20 @@ export default function MainPage() {
       </Animated.View>
 
       <Animated.View style={{ ...styles.contentContainer }} >
-
         <View style={styles.boxPesquisaHome}>
           <Text style={styles.titlePesquisaHome}>
-            Ou digite aqui sua suspeita
+            Ou escolha aqui sua suspeita
           </Text>
           <SelectDropdown
             data={availableOrgans}
             onSelect={selectOrgan}
+            buttonStyle={styles.dropdownAvailableOrgans}
           />
-          <TouchableOpacity style={styles.buttonPesquisaHome}>
-            <Text style={styles.buttonPesquisaHomeText} onPress={() => { }}>
+          <TouchableOpacity
+            style={styles.buttonPesquisaHome}
+            onPress={linkToExamSearchResults}
+          >
+            <Text style={styles.buttonPesquisaHomeText}>
               Consultar
             </Text>
           </TouchableOpacity>
@@ -153,8 +159,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: '80%',
-    paddingTop: 40,
+    width: '100%',
+    padding: 32,
   },
   blocosArrow: {
     backgroundColor: 'transparent',
@@ -169,7 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     display: 'flex',
     flexDirection: 'column',
-    width: '93%',
+    width: '100%',
     height: '80%',
     padding: 10,
     borderRadius: 20,
@@ -190,99 +196,64 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   buttonPesquisaHome: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: '#5162FA',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    logoContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 28,
-    },
-    contentContainer: {
-        flex: 1,
-        backgroundColor: '#fff',
-        paddingTop: 32,
-        paddingHorizontal: 8,
-        borderWidth: 0,
-        borderTopStartRadius: 32,
-        borderTopEndRadius: 32,
-        width: '100%',
-    },
-    titleHome: {
-        fontWeight: '600',
-        fontSize: 30,
-        color: '#FFFFFF',
-        margin: 0,
-        textAlign: 'center',
-    },
-    blocoButtons: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      flexDirection: 'row',
-      width: '80%',
-      paddingTop: 40,
-    },
-    blocosArrow: {
-        backgroundColor: 'transparent',
-        borderWidth: 0,
-        fontSize: 30,
-    },
-    imageHome: {
-      width: 220,
-      height: 300,
-    },
-    boxPesquisaHome: {
-      backgroundColor: '#FFFFFF',
-      display: 'flex',
-      flexDirection: 'column',
-      width: '93%',
-      height: '80%',
-      padding: 10,
-      borderRadius: 20,
-      justifyContent: 'space-between',
-    },
-    titlePesquisaHome: {
-      fontWeight: '500',
-      fontSize: 16,
-      color: '#666666',
-    },
-    pesquisaHome: {
-      backgroundColor: '#F6F6F6',
-      borderColor: '#E8E8E8',
-      borderWidth: 1,
-      borderRadius: 8,
-      height: 50,
-      margin: 10,
-      paddingHorizontal: 10,
-    },
-    buttonPesquisaHome: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      backgroundColor: '#5162FA',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 4,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
-      borderRadius: 8,
-    },
-    buttonPesquisaHomeText: {
-        fontWeight: '600',
-        fontSize: 16,
-        color: '#FFFFFF',
-    },
-  });
+    padding: 12,
+    paddingHorizontal: 14,
+    borderWidth: 0,
+    borderRadius: 8,
+    backgroundColor: '#5162fa',
+  },
+  buttonPesquisaHomeText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '600'
+  },
+  dropdownAvailableOrgans: {
+    width: '100%',
+    padding: 8
+  }
+});
+
+
+
+    // boxPesquisaHome: {
+    //   backgroundColor: '#FFFFFF',
+    //   display: 'flex',
+    //   flexDirection: 'column',
+    //   width: '93%',
+    //   height: '80%',
+    //   padding: 10,
+    //   borderRadius: 20,
+    //   justifyContent: 'space-between',
+    // },
+    // titlePesquisaHome: {
+    //   fontWeight: '500',
+    //   fontSize: 16,
+    //   color: '#666666',
+    // },
+    // pesquisaHome: {
+    //   backgroundColor: '#F6F6F6',
+    //   borderColor: '#E8E8E8',
+    //   borderWidth: 1,
+    //   borderRadius: 8,
+    //   height: 50,
+    //   margin: 10,
+    //   paddingHorizontal: 10,
+    // },
+    // buttonPesquisaHome: {
+    //   display: 'flex',
+    //   justifyContent: 'center',
+    //   alignItems: 'center',
+    //   paddingVertical: 10,
+    //   paddingHorizontal: 20,
+    //   backgroundColor: '#5162FA',
+    //   shadowColor: '#000',
+    //   shadowOffset: {
+    //     width: 0,
+    //     height: 4,
+    //   },
+    //   shadowOpacity: 0.25,
+    //   shadowRadius: 4,
+    //   elevation: 5,
+    //   borderRadius: 8,
+    // },

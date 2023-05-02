@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowLeft, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Favoritos() {
   const navigation = useNavigation();
+
+  const [favorites, setFavorites] = useState([])
+
+  const getFavoritesFromCache = async () => {
+    const cachedFavoritesExamsRaw = await AsyncStorage.getItem('@favorites')
+
+    if (!cachedFavoritesExamsRaw) {
+      return [] as number[]
+      // Seria aqui que carregariamos da API os exames mais recentes, mas...
+    } else {
+      const cachedFavoritesExams =
+        JSON.parse(cachedFavoritesExamsRaw) as number[]
+
+      return cachedFavoritesExams
+    }
+  }
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <View style={styles.screenMain}>

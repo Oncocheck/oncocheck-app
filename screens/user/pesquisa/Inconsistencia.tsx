@@ -22,7 +22,7 @@ export default function Inconsistencia() {
                 <TouchableOpacity style={styles.buttonAzul}>
                     <Text style={styles.textButton}>Enviar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonVermelho} onPress={() => navigation.navigate('Inconsistencia')}>
+                <TouchableOpacity style={styles.buttonVermelho} onPress={navigation.goBack}>
                     <Text style={styles.textButton}>Cancelar</Text>
                 </TouchableOpacity>
             </View>
